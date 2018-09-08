@@ -1,0 +1,10 @@
+﻿
+@model IEnumerable<BookStore.BLL.DTO.BookDTO>
+<h2>Index</h2>
+@foreach (var dto in Model)
+{
+    @Html.DisplayFor(modelItem => dto.Name)<br />
+
+    @Html.DisplayFor(modelItem => dto.Description)<br />
+
+}
