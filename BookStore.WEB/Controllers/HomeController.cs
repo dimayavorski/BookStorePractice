@@ -1,12 +1,9 @@
 ﻿using BookStore.BLL.DTO;
 using BookStore.BLL.Interface;
-using BookStore.BLL.Services;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-
+using PagedList.Mvc;
+using PagedList;
 namespace BookStore.WEB.Controllers
 {
     public class HomeController : Controller
@@ -16,10 +13,12 @@ namespace BookStore.WEB.Controllers
         {
             orderService = service;
         }
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
             IEnumerable<BookDTO> bookDtos = orderService.GetBooks();
-            return View(bookDtos);
+            return View(bookDtos.ToPagedList(pageNumber,pageSize));
         }
         public ActionResult GetBook(int id)
         {

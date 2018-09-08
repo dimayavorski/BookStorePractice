@@ -112,3 +112,7 @@ D:\Projects\BookStore\BookStore\BookStore.WEB\obj\Debug\BookStore.WEB.csproj.Cor
 D:\Projects\BookStore\BookStore\BookStore.WEB\obj\Debug\BookStore.WEB.csproj.CopyComplete
 D:\Projects\BookStore\BookStore\BookStore.WEB\obj\Debug\BookStore.WEB.dll
 D:\Projects\BookStore\BookStore\BookStore.WEB\obj\Debug\BookStore.WEB.pdb
+D:\Projects\BookStore\BookStore\BookStore.WEB\bin\PagedList.dll
+D:\Projects\BookStore\BookStore\BookStore.WEB\bin\PagedList.Mvc.dll
+D:\Projects\BookStore\BookStore\BookStore.WEB\bin\PagedList.xml
+D:\Projects\BookStore\BookStore\BookStore.WEB\bin\PagedList.Mvc.xml
