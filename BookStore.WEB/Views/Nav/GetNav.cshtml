@@ -1,0 +1,8 @@
+﻿@model IEnumerable<BookStore.BLL.DTO.CategoryDTO>
+
+<h4>MENU</h4>
+@foreach (var category in Model)
+{
+    <input type="submit" value="@category.CategoryName" class="btn btn-primary" />
+}
+

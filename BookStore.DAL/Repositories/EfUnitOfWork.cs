@@ -13,6 +13,7 @@ namespace BookStore.DAL.Repositories
     {
         private BookContext db;
         private BookRepository bookRepository;
+        private CategoryRepository categoryRepository;
         public EfUnitOfWork(string connectionString)
         {
             db = new BookContext(connectionString);
@@ -26,6 +27,17 @@ namespace BookStore.DAL.Repositories
                 return bookRepository;
             }
         }
+
+        public IRepository<Category> Categories
+        {
+            get
+            {
+                if (categoryRepository == null)
+                    categoryRepository = new CategoryRepository(db);
+                return categoryRepository;
+            }
+        }
+
         private bool disposed = false;
         public virtual void Dispose(bool disposing)
         {

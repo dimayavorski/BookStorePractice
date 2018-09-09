@@ -49,17 +49,36 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EF\BookContext.cs" />
+    <Compile Include="Entities\Author.cs" />
     <Compile Include="Entities\Book.cs" />
+    <Compile Include="Entities\Category.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Migrations\201809091740533_AddCategoryMigration.cs" />
+    <Compile Include="Migrations\201809091740533_AddCategoryMigration.Designer.cs">
+      <DependentUpon>201809091740533_AddCategoryMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809091750468_AddCategory.cs" />
+    <Compile Include="Migrations\201809091750468_AddCategory.Designer.cs">
+      <DependentUpon>201809091750468_AddCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BookRepository.cs" />
+    <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\EfUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201809091740533_AddCategoryMigration.resx">
+      <DependentUpon>201809091740533_AddCategoryMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809091750468_AddCategory.resx">
+      <DependentUpon>201809091750468_AddCategory.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

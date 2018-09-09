@@ -20,7 +20,7 @@ namespace BookStore.BLL.Services
         {
             Database = unitOfWork;
         }
-
+        //Start of BookService logics
         public BookDTO GetBook(int? id)
         {
             if (id == null)
@@ -38,10 +38,16 @@ namespace BookStore.BLL.Services
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Book, BookDTO>()).CreateMapper();
             return mapper.Map<IEnumerable<Book>, List<BookDTO>>(Database.Books.GetAll());
         }
-
+        //END OF BokkService Logics
         public void Dispose()
         {
             Database.Dispose();
+        }
+        //Start of CategoryService Logics
+        public IEnumerable<CategoryDTO> GetCategories()
+        {
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Category, CategoryDTO>()).CreateMapper();
+            return mapper.Map<IEnumerable<Category>, List<CategoryDTO>>(Database.Categories.GetAll());
         }
     }
 }

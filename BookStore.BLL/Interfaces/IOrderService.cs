@@ -12,6 +12,7 @@ namespace BookStore.BLL.Interface
     {
         BookDTO GetBook(int? id);
         IEnumerable<BookDTO> GetBooks();
+        IEnumerable<CategoryDTO> GetCategories();
         void Dispose();
     }
 }
