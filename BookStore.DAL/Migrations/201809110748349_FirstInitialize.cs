@@ -3,7 +3,7 @@ namespace BookStore.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddCategoryMigration : DbMigration
+    public partial class FirstInitialize : DbMigration
     {
         public override void Up()
         {
@@ -24,12 +24,14 @@ namespace BookStore.DAL.Migrations
                         Name = c.String(),
                         Description = c.String(),
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Category = c.String(),
                         AuthorId = c.Int(nullable: false),
+                        CategoryId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Authors", t => t.AuthorId, cascadeDelete: true)
-                .Index(t => t.AuthorId);
+                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
+                .Index(t => t.AuthorId)
+                .Index(t => t.CategoryId);
             
             CreateTable(
                 "dbo.Categories",
@@ -44,7 +46,9 @@ namespace BookStore.DAL.Migrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.Books", "CategoryId", "dbo.Categories");
             DropForeignKey("dbo.Books", "AuthorId", "dbo.Authors");
+            DropIndex("dbo.Books", new[] { "CategoryId" });
             DropIndex("dbo.Books", new[] { "AuthorId" });
             DropTable("dbo.Categories");
             DropTable("dbo.Books");

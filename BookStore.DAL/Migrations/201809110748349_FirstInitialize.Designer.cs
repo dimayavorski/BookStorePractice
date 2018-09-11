@@ -7,13 +7,13 @@ namespace BookStore.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddCategory : IMigrationMetadata
+    public sealed partial class FirstInitialize : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddCategory));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(FirstInitialize));
         
         string IMigrationMetadata.Id
         {
-            get { return "201809091750468_AddCategory"; }
+            get { return "201809110748349_FirstInitialize"; }
         }
         
         string IMigrationMetadata.Source
