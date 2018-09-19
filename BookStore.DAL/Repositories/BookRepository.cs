@@ -50,5 +50,11 @@ namespace BookStore.DAL.Repositories
         {
             db.Entry(item).State = EntityState.Modified;
         }
+
+        //public IEnumerable<Book> GetBooksByCategory(string category)
+        //{
+        //    return db.Books.Where(string)
+        //}
+        
     }
 }

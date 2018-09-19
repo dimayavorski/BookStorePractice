@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using PagedList.Mvc;
 using PagedList;
+using AutoMapper;
+using BookStore.WEB.Models;
+
 namespace BookStore.WEB.Controllers
 {
     public class HomeController : Controller
@@ -13,12 +16,14 @@ namespace BookStore.WEB.Controllers
         {
             orderService = service;
         }
-        public ActionResult Index(int? page)
+        public ActionResult Index(string category,int? page = 1)
         {
             int pageSize = 3;
             int pageNumber = (page ?? 1);
-            IEnumerable<BookDTO> bookDtos = orderService.GetBooks();
-            return View(bookDtos.ToPagedList(pageNumber,pageSize));
+            
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO,BookViewModel>()).CreateMapper();
+            var books = mapper.Map<IEnumerable<BookDTO>, List<BookViewModel>>(orderService.GetBooks(category));
+            return View(books.ToPagedList(pageNumber,pageSize));
         }
         public ActionResult GetBook(int id)
         {

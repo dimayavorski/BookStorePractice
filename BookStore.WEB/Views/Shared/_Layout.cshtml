@@ -10,7 +10,7 @@
         @Scripts.Render("~/bundles/modernizr")*@
 </head>
 <body>
-    <section>
+   
         <nav id="nav" class="navbar navbar-dark bg-primary">
             <a href="#" class="navbar-brand">BookStore</a>
            @*@using (Html.BeginForm("","",FormMethod.Post,new {@class = "form-inline"}))
@@ -18,11 +18,11 @@
                 
             }*@
             <div class="form-inline">
-                <input class="form-control float-right mr-sm-2" placeholder="Search" />
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                <input class="form-control float-right mr-sm-2" placeholder="Автор/Книга" />
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Поиск</button>
             </div>
         </nav>
-    </section>
+   
     <section class="container">
         <div class="row">
             <div class="col-sm-2">@Html.Action("GetNav","Nav")</div>

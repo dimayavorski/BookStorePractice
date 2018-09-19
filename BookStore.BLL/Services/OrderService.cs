@@ -33,10 +33,25 @@ namespace BookStore.BLL.Services
 
         }
 
-        public IEnumerable<BookDTO> GetBooks()
+        public IEnumerable<BookDTO> GetBooks(string category)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Book, BookDTO>()).CreateMapper();
-            return mapper.Map<IEnumerable<Book>, List<BookDTO>>(Database.Books.GetAll());
+            IEnumerable<Book> books;
+            if(category != null)
+            {
+                 books = Database.Books.GetAll().Where(b => b.Category.CategoryName == null || b.Category.CategoryName == category);
+                
+            }
+            else
+            {
+                 books = Database.Books.GetAll();
+
+            }
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Book, BookDTO>().ForMember(dto => dto.Author,
+          src => src.MapFrom(b => b.Author.Name)).ForMember(dto => dto.Category,
+          src => src.MapFrom(b => b.Category.CategoryName))).CreateMapper();
+            return mapper.Map<IEnumerable<Book>, List<BookDTO>>(books);
+
+
         }
         //END OF BokkService Logics
         public void Dispose()

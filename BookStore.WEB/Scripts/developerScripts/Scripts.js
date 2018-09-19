@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿
+$(document).ready(function () {
     var navPos, winPos, navHeight;
     //getting position of nav
     function getPosition() {
@@ -20,4 +21,6 @@
             $(".clone-nav").hide();
         }
     });
+    //left nav 
+    $("#navbarHidden").hide();
 });

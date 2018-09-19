@@ -10,6 +10,6 @@ namespace BookStore.DAL.Entities
     {
         public int Id { get; set; }
         public string CategoryName { get; set; }
-        public IEnumerable<Book> Books { get; set; }
+        
     }
 }

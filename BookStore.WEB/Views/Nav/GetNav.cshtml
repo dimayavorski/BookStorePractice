@@ -1,8 +1,24 @@
 ﻿@model IEnumerable<BookStore.BLL.DTO.CategoryDTO>
 
-<h4>MENU</h4>
-@foreach (var category in Model)
-{
-    <input type="submit" value="@category.CategoryName" class="btn btn-primary" />
-}
+<div class="btn-group dropright my-3">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Жанры
+    </button>        
+    <div class="dropdown-menu">
+            @foreach (var link in Model)
+            {
+                @Html.RouteLink(link.CategoryName, new
+           {
+               controller = "Home",
+               action = "Index",
+               category = link.CategoryName,
+           }, new
+           {
+               @class = "dropdown-item " + (link.CategoryName == ViewBag.SelectedCategegory? "active": "")
+           })
+                }
+    </div>
+</div>
+
+
 

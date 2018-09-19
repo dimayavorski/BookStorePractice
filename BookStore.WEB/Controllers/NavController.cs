@@ -15,10 +15,10 @@ namespace BookStore.WEB.Controllers
         {
             orderService = service;
         }
-        public ActionResult GetNav()
+        public ActionResult GetNav(string category = null)
         {
             var categoryDTOs = orderService.GetCategories();
-            
+            ViewBag.SelectedCategegory = category;
             return PartialView(categoryDTOs);
         }
     }
