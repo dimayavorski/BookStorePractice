@@ -10,6 +10,7 @@ namespace BookStore.WEB.Util
         public override void Load()
         {
             Bind<IOrderService>().To<OrderService>();
+            Kernel.Unbind<ModelValidatorProvider>();
         }
     }
 }

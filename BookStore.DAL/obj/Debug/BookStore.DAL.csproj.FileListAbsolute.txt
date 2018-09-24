@@ -12,3 +12,7 @@ D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.dll
 D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.pdb
 D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.Migrations.FirstInitialize.resources
 D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.csproj.GenerateResource.cache
+D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.Migrations.Addedordersmodel.resources
+D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.Migrations.AddedNewOrdersModel.resources
+D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.Migrations.CartItem.resources
+D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.Migrations.addedcarttoBll.resources

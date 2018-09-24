@@ -2,6 +2,7 @@
 using BookStore.BLL.DTO;
 using BookStore.BLL.Infrastructure;
 using BookStore.BLL.Interface;
+using BookStore.BLL.ShoppinCart;
 using BookStore.DAL.Entities;
 using BookStore.DAL.Interfaces;
 using BookStore.DAL.Repositories;
@@ -63,6 +64,11 @@ namespace BookStore.BLL.Services
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Category, CategoryDTO>()).CreateMapper();
             return mapper.Map<IEnumerable<Category>, List<CategoryDTO>>(Database.Categories.GetAll());
+        }
+
+        public Cart GetCart()
+        {
+            return new Cart();
         }
     }
 }

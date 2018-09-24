@@ -1,0 +1,17 @@
+﻿@model BookStore.WEB.Models.BookViewModel
+<div class="card cards">
+    <div class="card-body">
+        <h4 class="card-title">@Model.Name</h4>
+        <h6 class="card-text">Жанр : @Model.Category</h6>
+        <p class="card-text">@Model.Description</p>
+        <h6 class="card-title">@Model.Author</h6>
+        <h6 class="text-right">@Model.Price.ToString("# руб")</h6>
+        @using (Ajax.BeginForm("AddToCart","ShoppingCart",new AjaxOptions {UpdateTargetId = "shoppingCart"}))
+        {
+            
+            @Html.HiddenFor(m=>m.Id)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            <input type="submit" class="btn btn-sm btn-primary" value="Добавить в корзину" />
+        }
+    </div>
+</div>
