@@ -30,7 +30,7 @@ namespace BookStore.WEB.Controllers
            
             return View(viewModel);
         }
-        public ActionResult AddToCart(int id,string returnUrl)
+        public ActionResult AddToCart(int id,string returnUrl,int? page,string category)
         {
             var book = orderService.GetBook(id);
             
@@ -38,8 +38,8 @@ namespace BookStore.WEB.Controllers
             {
                 GetCart().AddItem(book,1);
             }
-           
-            return RedirectToAction("Index", "Home");
+
+            return RedirectToAction("Index", "Home",new { page = page,category = category});
         }
         
         public Cart GetCart()

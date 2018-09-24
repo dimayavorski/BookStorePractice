@@ -12,7 +12,10 @@ namespace BookStore.WEB
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            //routes.MapRoute(
+            //    name: "NavFirst",
+            //    url:"{controller}/{action}",
+            //    defaults: new { controller="Nav",action ="GetNav",id = UrlParameter.Optional});
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

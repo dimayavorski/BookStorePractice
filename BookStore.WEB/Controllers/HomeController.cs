@@ -20,8 +20,9 @@ namespace BookStore.WEB.Controllers
         {
             int pageSize = 3;
             int pageNumber = (page ?? 1);
-            
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO,BookViewModel>()).CreateMapper();
+            ViewBag.category = category;
+            ViewBag.page = page;
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, BookViewModel>()).CreateMapper();
             var books = mapper.Map<IEnumerable<BookDTO>, List<BookViewModel>>(orderService.GetBooks(category));
             return View(books.ToPagedList(pageNumber,pageSize));
         }
