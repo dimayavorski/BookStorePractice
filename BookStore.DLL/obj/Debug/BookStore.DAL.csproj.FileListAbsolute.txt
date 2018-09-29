@@ -1,5 +1,0 @@
-D:\Projects\BookStore\BookStore\BookStore.DLL\bin\Debug\BookStore.DLL.dll
-D:\Projects\BookStore\BookStore\BookStore.DLL\bin\Debug\BookStore.DLL.pdb
-D:\Projects\BookStore\BookStore\BookStore.DLL\obj\Debug\BookStore.DAL.csproj.CoreCompileInputs.cache
-D:\Projects\BookStore\BookStore\BookStore.DLL\obj\Debug\BookStore.DLL.dll
-D:\Projects\BookStore\BookStore\BookStore.DLL\obj\Debug\BookStore.DLL.pdb

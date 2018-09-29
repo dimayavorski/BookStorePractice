@@ -1,0 +1,34 @@
+﻿@model BookStore.WEB.Models.ShoppingCartViewModel
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Кол-во</th>
+            <th>Книга</th>
+            <th>Цена</th>
+            <th>Общая цена</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.Cart.Lines)
+        {
+            <tr>
+                <td>@line.Quantity</td>
+                <td>@line.Book.Name</td>
+                <td>@line.Book.Price.ToString("# руб")</td>
+                <td>@((line.Quantity * line.Book.Price).ToString("# руб"))</td>
+                <td>
+                @Html.ActionLink("Удалить", "RemoveFromCart", "ShoppingCart", new { id = line.Book.Id, returnUrl = Model.returnUrl},new {@class="btn btn-primary"})
+                </td>
+        </tr>
+    }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3">Итоге:</td>
+            <td>
+                @Model.Cart.ComputeTotalValue().ToString("# руб")
+            </td>
+        </tr>
+    </tfoot>
+</table>

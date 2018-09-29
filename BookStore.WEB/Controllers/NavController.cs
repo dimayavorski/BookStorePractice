@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using AutoMapper;
 using System.Web.Mvc;
 using BookStore.WEB.Models;
+using BookStore.BLL.ShoppinCart;
 
 namespace BookStore.WEB.Controllers
 {
@@ -21,5 +22,25 @@ namespace BookStore.WEB.Controllers
             ViewBag.SelectedCategegory = category;
             return PartialView(categoryDTOs);
         }
+        //public ActionResult RemoveFromCart(int id)
+        //{
+        //    var book = orderService.GetBook(id);
+        //    if (book != null)
+        //    {
+        //        GetCart().RemoveLine(book);
+        //    }
+        //    return RedirectToAction("GetNav");
+        //}
+        //public Cart GetCart()
+        //{
+        //    Cart cart = (Cart)Session["Cart"];
+        //    if (cart == null)
+        //    {
+        //        cart = new Cart();
+        //        //cart = orderService.GetCart();
+        //        Session["Cart"] = cart;
+        //    }
+        //    return cart;
+        //}
     }
 }

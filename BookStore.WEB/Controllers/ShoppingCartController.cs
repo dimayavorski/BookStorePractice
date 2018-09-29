@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
-
 using BookStore.BLL.DTO;
 using System.Web.Mvc;
 using BookStore.BLL.Interface;
@@ -15,6 +13,7 @@ namespace BookStore.WEB.Controllers
 {
     public class ShoppingCartController : Controller
     {
+       
         IOrderService orderService;
         public ShoppingCartController(IOrderService service)
         {
@@ -24,11 +23,19 @@ namespace BookStore.WEB.Controllers
         {
             ShoppingCartViewModel viewModel = new ShoppingCartViewModel
             {
+                returnUrl = returnUrl
+            };
+            //ViewBag.returnUrl = returnUrl;
+            return View(viewModel);//Papapa
+        }
+        public ActionResult ShowCart(string returnUrl)
+        {
+            ShoppingCartViewModel viewModel = new ShoppingCartViewModel
+            {
                 Cart = GetCart(),
                 returnUrl = returnUrl
             };
-           
-            return View(viewModel);
+            return PartialView("ShowCart",viewModel);
         }
         public ActionResult AddToCart(int id,string returnUrl,int? page,string category)
         {
@@ -40,6 +47,15 @@ namespace BookStore.WEB.Controllers
             }
 
             return RedirectToAction("Index", "Home",new { page = page,category = category});
+        }
+        public ActionResult RemoveFromCart(int id,string returnUrl)
+        {
+            var book = orderService.GetBook(id);
+            if (book != null)
+            {
+                GetCart().RemoveLine(book);
+            }
+            return RedirectToAction("Index","ShoppingCart",new { returnUrl = returnUrl });
         }
         
         public Cart GetCart()

@@ -11,3 +11,10 @@
     left:0;
     z-index:1;
 }
+.btnsizing {
+    width:200px;
+    height:100px;
+    border: 1px solid #2d42b7;
+    background-color:aqua;
+    font-size:20px;
+}

@@ -1,22 +1,26 @@
 ﻿@model IEnumerable<BookStore.BLL.DTO.CategoryDTO>
+<link href="~/Content/Site.css" rel="stylesheet" />
+@Html.ActionLink("Главная", "Index", "Home", null, new { @class = "btn btn_sizing btn-primary mt-3" })
 
+@*@Html.ActionLink("Главная", "Index", "Home", null, new { @class = "btn_sizing" })*@
+@*<button class="btnsizing">ASasd</button>*@
 <div class="btn-group dropright my-3">
     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Жанры
-    </button>        
+    </button>
     <div class="dropdown-menu">
-            @foreach (var link in Model)
-            {
-                @Html.RouteLink(link.CategoryName, new
-           {
-               controller = "Home",
-               action = "Index",
-               category = link.CategoryName,
-           }, new
-           {
-               @class = "dropdown-item " + (link.CategoryName == ViewBag.SelectedCategegory? "active": "")
-           })
-                }
+        @foreach (var link in Model)
+        {
+            @Html.RouteLink(link.CategoryName, new
+       {
+           controller = "Home",
+           action = "Index",
+           category = link.CategoryName,
+       }, new
+       {
+           @class = "dropdown-item " + (link.CategoryName == ViewBag.SelectedCategegory? "active": "")
+       })
+        }
     </div>
 </div>
 

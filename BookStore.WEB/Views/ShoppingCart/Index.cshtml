@@ -1,39 +1,10 @@
 ﻿@model BookStore.WEB.Models.ShoppingCartViewModel
-
 @{
-    ViewBag.Title = "Корзина";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <h2>Ваша корзина</h2>
-<h1>@ViewBag.Id</h1>
-<table class="table" id="shoppingCart">
-    <thead>
-        <tr>
-            <th>Кол-во</th>
-            <th>Книга</th>
-            <th>Цена</th>
-            <th>Общая цена</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var line in Model.Cart.Lines)
-        {
-        <tr>
-            <td>@line.Quantity</td>
-            <td>@line.Book.Name</td>
-            <td>@line.Book.Price.ToString("# руб")</td>
-            <td>@((line.Quantity*line.Book.Price).ToString("# руб"))</td>
-        </tr>
-        }
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="3">Итоге:</td>
-            <td>
-                @Model.Cart.ComputeTotalValue().ToString("# руб")
-            </td>
-        </tr>
-    </tfoot>
-</table>
-<div>
-    <a class="btn btn-primary" href="@Model.returnUrl">Продолжить покупки</a>
-</div>
+@Html.Action("ShowCart", new { returnUrl = Model.returnUrl})
+<a class="btn btn-primary" href="@Model.returnUrl">Продолжить покупки</a>
+

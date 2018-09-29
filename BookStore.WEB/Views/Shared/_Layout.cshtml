@@ -11,17 +11,19 @@
 </head>
 <body>
    
-        <nav id="nav" class="navbar navbar-dark bg-primary">
-            <a href="#" class="navbar-brand">BookStore</a>
-           @*@using (Html.BeginForm("","",FormMethod.Post,new {@class = "form-inline"}))
-            {
-                
-            }*@
-            <div class="form-inline">
-                <input class="form-control float-right mr-sm-2" placeholder="Автор/Книга" />
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Поиск</button>
-            </div>
-        </nav>
+    <nav id="nav" class="navbar navbar-dark bg-primary">
+        <a href="#" class="navbar-brand">BookStore</a>
+        @*@using (Html.BeginForm("","",FormMethod.Post,new {@class = "form-inline"}))
+        {
+
+        }*@
+        @Html.ActionLink("Корзина","Index", "ShoppingCart",new { returnUrl = Request.Url.PathAndQuery}, new { @class = "btn btn-outline-light float-left" })
+        <div class="form-inline">
+
+            <input class="form-control float-right mr-sm-2" placeholder="Автор/Книга" />
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Поиск</button>
+        </div>
+    </nav>
    
     <section class="container">
         <div class="row">
