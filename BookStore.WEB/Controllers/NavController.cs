@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using AutoMapper;
 using System.Web.Mvc;
 using BookStore.WEB.Models;
-using BookStore.BLL.ShoppinCart;
-
 namespace BookStore.WEB.Controllers
 {
     public class NavController : Controller

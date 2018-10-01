@@ -7,7 +7,6 @@ using System.Web.Mvc;
 using BookStore.BLL.Interface;
 using System.Threading.Tasks;
 using BookStore.WEB.Models;
-using BookStore.BLL.ShoppinCart;
 
 namespace BookStore.WEB.Controllers
 {
@@ -15,60 +14,50 @@ namespace BookStore.WEB.Controllers
     {
        
         IOrderService orderService;
-        public ShoppingCartController(IOrderService service)
+        private readonly ShoppingCartFactory shoppingCartFactory;
+        public ShoppingCartController(IOrderService service,ShoppingCartFactory factory)
         {
             orderService = service;
+            shoppingCartFactory = factory;
         }
-        public ActionResult Index(string returnUrl)
+        public async Task<ActionResult> Index(string returnUrl)
         {
             ShoppingCartViewModel viewModel = new ShoppingCartViewModel
             {
+                CartItems = await orderService.GetAllCartItems(shoppingCartFactory.GetCart(this.HttpContext).ShoppingCartId),
                 returnUrl = returnUrl
             };
-            //ViewBag.returnUrl = returnUrl;
-            return View(viewModel);//sadsaad
+            return View(viewModel);
         }
-        public ActionResult ShowCart(string returnUrl)
-        {
-            ShoppingCartViewModel viewModel = new ShoppingCartViewModel
-            {
-                Cart = GetCart(),
-                returnUrl = returnUrl
-            };
-            return PartialView("ShowCart",viewModel);
-        }
-        public ActionResult AddToCart(int id,string returnUrl,int? page,string category)
-        {
-            var book = orderService.GetBook(id);
-            
-            if (book != null)
-            {
-                GetCart().AddItem(book,1);
-            }
+        //public async Task<ActionResult> ShowCart(string returnUrl)
+        //{
 
-            return RedirectToAction("Index", "Home",new { page = page,category = category});
-        }
+        //    ShoppingCartViewModel viewModel = new ShoppingCartViewModel {
+        //        CartItems = await orderService.GetAllCartItems(shoppingCartFactory.GetCart(this.HttpContext).ShoppingCartId),
+        //        returnUrl = returnUrl
+        //    };
+
+        //    return PartialView("ShowCart", viewModel);
+
+        //}
+      
+        public async Task<ActionResult> AddToCart(int? id, int? page, string category)
+        {
+            var addedBook = orderService.GetBook(id.Value);
+            var cart = shoppingCartFactory.GetCart(this.HttpContext);
+            await orderService.AddToCart(addedBook,cart.ShoppingCartId);
+            
+            return RedirectToAction("Index","Home", new { page = page.Value, category = category });
+        } 
+
+
         public ActionResult RemoveFromCart(int id,string returnUrl)
         {
-            var book = orderService.GetBook(id);
-            if (book != null)
-            {
-                GetCart().RemoveLine(book);
-            }
+            
             return RedirectToAction("Index","ShoppingCart",new { returnUrl = returnUrl });
         }
         
-        public Cart GetCart()
-        {
-            Cart cart = (Cart)Session["Cart"];
-            if (cart == null)
-            {
-                cart = new Cart();
-                //cart = orderService.GetCart();
-                Session["Cart"] = cart;
-            }
-            return cart;
-        }
+       
 
     }
 }

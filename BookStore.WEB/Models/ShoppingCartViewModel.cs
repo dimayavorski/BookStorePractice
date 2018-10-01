@@ -1,16 +1,13 @@
-﻿using BookStore.BLL.DTO;
-using BookStore.BLL.ShoppinCart;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using BookStore.BLL.DTO;
 namespace BookStore.WEB.Models
 {
     public class ShoppingCartViewModel
     {
-       
-        public Cart Cart { get; set; }
+        public List<CartItemDTO> CartItems { get; set; }
         public string returnUrl { get; set; }
     }
 }

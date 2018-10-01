@@ -2,7 +2,6 @@
 using BookStore.BLL.DTO;
 using BookStore.BLL.Infrastructure;
 using BookStore.BLL.Interface;
-using BookStore.BLL.ShoppinCart;
 using BookStore.DAL.Entities;
 using BookStore.DAL.Interfaces;
 using BookStore.DAL.Repositories;
@@ -66,9 +65,32 @@ namespace BookStore.BLL.Services
             return mapper.Map<IEnumerable<Category>, List<CategoryDTO>>(Database.Categories.GetAll());
         }
 
-        public Cart GetCart()
+       
+    
+        //Start of ShoppingCart Logics
+        public async Task AddToCart(BookDTO cartItem,string Id)
         {
-            return new Cart();
+            //var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, Book>()).CreateMapper();
+            //var book = mapper.Map<BookDTO, Book>(Database.Books.Get(cartItem.Id));
+            Book book = new Book()
+            {
+                Id = cartItem.Id,
+                Name = cartItem.Name,
+                Description = cartItem.Description,
+                Price = cartItem.Price
+            };
+            //var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, Book>().ForMember(dt)
+            //Database.Carts.AddToCart(book);
+            await Database.Carts.AddToCart(book,Id);
+            await Database.SaveAsync();
+            
+        }
+
+        public async  Task<List<CartItemDTO>> GetAllCartItems(string Id)
+        {
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CartItem, CartItemDTO>()).CreateMapper();
+            
+            return  mapper.Map<IEnumerable<CartItem>, List<CartItemDTO>>(await Database.Carts.GetAll(Id));
         }
     }
 }

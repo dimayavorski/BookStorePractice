@@ -10,7 +10,6 @@
             {
 
                 @Html.HiddenFor(m=>m.Id)
-                @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
                 <input type="hidden" value="@ViewBag.page" name="page" />
                 <input type="hidden" value="@ViewBag.category" name="category" />
                 <input type="submit" class="btn btn-sm btn-primary" value="Добавить в корзину" />

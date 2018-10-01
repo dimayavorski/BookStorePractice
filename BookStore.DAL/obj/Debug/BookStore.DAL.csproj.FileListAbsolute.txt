@@ -16,3 +16,4 @@ D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.Migrations
 D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.Migrations.AddedNewOrdersModel.resources
 D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.Migrations.CartItem.resources
 D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.Migrations.addedcarttoBll.resources
+D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.Migrations.addedcartItems.resources

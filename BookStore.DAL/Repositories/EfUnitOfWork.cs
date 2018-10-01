@@ -14,6 +14,7 @@ namespace BookStore.DAL.Repositories
         private BookContext db;
         private BookRepository bookRepository;
         private CategoryRepository categoryRepository;
+        private CartRepository cartRepository;
         
         public EfUnitOfWork(string connectionString)
         {
@@ -38,7 +39,14 @@ namespace BookStore.DAL.Repositories
                 return categoryRepository;
             }
         }
-      
+
+        public ICartRepository Carts
+        {
+            get { if (cartRepository == null)
+                    cartRepository = new CartRepository(db);
+                return cartRepository;
+            }
+        }
 
         private bool disposed = false;
         public virtual void Dispose(bool disposing)
@@ -58,8 +66,14 @@ namespace BookStore.DAL.Repositories
             GC.SuppressFinalize(this);
         }
 
+        public async Task SaveAsync()
+        {
+            await db.SaveChangesAsync();
+        }
+        
         public void Save()
         {
+           
             db.SaveChanges();
         }
     }
