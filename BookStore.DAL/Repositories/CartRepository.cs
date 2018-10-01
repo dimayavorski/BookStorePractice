@@ -43,12 +43,35 @@ namespace BookStore.DAL.Repositories
             }
             
         }
+        //Remove All CartItems From Db 
+        public async Task Empty(string CartId)
+        {
+            var cartItems = await db.CartItems.Where(c => c.CartId == CartId).Include(b => b.Book).ToArrayAsync();
+            db.CartItems.RemoveRange(cartItems);
+        }
 
         public Task<List<CartItem>> GetAll(string Id)
         {
             return db.CartItems.Where(c => c.CartId == Id).Include(b => b.Book).ToListAsync();
         }
 
-     
+        public void Remove(int id, string CartId)
+        {
+            var cartItem = db.CartItems.SingleOrDefault(cart => cart.CartId == CartId && cart.CartItemId == id);
+            var itemCount = 0;
+            if (cartItem != null)
+            {
+                if (cartItem.Count > 1)
+                {
+                    cartItem.Count--;
+                    itemCount = cartItem.Count;
+                }
+                else
+                {
+                    db.CartItems.Remove(cartItem);
+                }
+            }
+            
+        }
     }
 }

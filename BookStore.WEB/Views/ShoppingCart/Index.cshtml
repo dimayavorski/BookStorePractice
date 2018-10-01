@@ -5,39 +5,41 @@
 }
 
 <h2>Ваша корзина</h2>
-    <table class="table">
-        <thead>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Кол-во</th>
+            <th>Книга</th>
+            <th>Цена</th>
+            <th>Общая цена</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.CartItems)
+        {
             <tr>
-                <th>Кол-во</th>
-                <th>Книга</th>
-                <th>Цена</th>
-                <th>Общая цена</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var line in Model.CartItems)
-            {
-                <tr>
-                    <td>@line.Count</td>
-                    <td>@line.Book.Name</td>
-                    <td>@line.Book.Price.ToString("# руб")</td>
-                    <td></td>
-                    <td>
-                    @Html.ActionLink("Удалить", "RemoveFromCart", "ShoppingCart", new { id = line.Book.Id, returnUrl = Model.returnUrl},new {@class="btn btn-primary"})
-                    </td>
-            </tr>
-        }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="3">Итоге:</td>
+                <td>@line.Count</td>
+                <td>@line.Book.Name</td>
+                <td>@line.Book.Price.ToString("# руб")</td>
+                <td>@((line.Book.Price * line.Count).ToString("# руб"))</td>
                 <td>
-
+                    @Html.ActionLink("Удалить", "RemoveFromCart", "ShoppingCart", new { id = line.CartItemId , returnUrl = Model.returnUrl}, new { @class = "btn btn-primary" })
                 </td>
             </tr>
-        </tfoot>
-    </table>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3">Итоге:</td>
+            <td>
+                @Model.CartTotal.ToString("# руб")
+            </td>
+        </tr>
+    </tfoot>
+</table>
 
 @*@Html.Action("ShowCart", new { returnUrl = Model.returnUrl })*@
-<a class="btn btn-primary" href="@Model.returnUrl">Продолжить покупки</a>
+<a class="btn btn-primary btn-sm" href="@Model.returnUrl">Продолжить покупки</a>
+@Html.ActionLink("Очистить корзину", "EmptyCart",new { returnUrl = Model.returnUrl}, new {@class ="btn btn-primary btn-sm"})
+
 

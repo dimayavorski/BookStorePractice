@@ -9,5 +9,7 @@ namespace BookStore.WEB.Models
     {
         public List<CartItemDTO> CartItems { get; set; }
         public string returnUrl { get; set; }
+        public decimal CartTotal { get; set;
+        }
     }
 }

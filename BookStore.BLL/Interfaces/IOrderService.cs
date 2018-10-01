@@ -13,8 +13,13 @@ namespace BookStore.BLL.Interface
         BookDTO GetBook(int? id);
         IEnumerable<BookDTO> GetBooks(string category);
         IEnumerable<CategoryDTO> GetCategories();
+
+
         Task AddToCart(BookDTO cartItem,string Id);
         Task<List<CartItemDTO>> GetAllCartItems(string Id);
+        void RemoveFromCart(int id, string CartId);
+        Task<decimal> GetTotal(string CartId);
+        Task EmptyCart(string CartId);
         void Dispose();
     }
 }

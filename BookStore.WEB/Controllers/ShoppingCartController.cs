@@ -12,7 +12,7 @@ namespace BookStore.WEB.Controllers
 {
     public class ShoppingCartController : Controller
     {
-       
+        
         IOrderService orderService;
         private readonly ShoppingCartFactory shoppingCartFactory;
         public ShoppingCartController(IOrderService service,ShoppingCartFactory factory)
@@ -22,10 +22,13 @@ namespace BookStore.WEB.Controllers
         }
         public async Task<ActionResult> Index(string returnUrl)
         {
+            
+            var cartId = shoppingCartFactory.GetCart(this.HttpContext).ShoppingCartId;
             ShoppingCartViewModel viewModel = new ShoppingCartViewModel
             {
-                CartItems = await orderService.GetAllCartItems(shoppingCartFactory.GetCart(this.HttpContext).ShoppingCartId),
-                returnUrl = returnUrl
+                CartItems = await orderService.GetAllCartItems(cartId),
+                returnUrl = returnUrl,
+                CartTotal = await orderService.GetTotal(cartId)
             };
             return View(viewModel);
         }
@@ -48,16 +51,24 @@ namespace BookStore.WEB.Controllers
             await orderService.AddToCart(addedBook,cart.ShoppingCartId);
             
             return RedirectToAction("Index","Home", new { page = page.Value, category = category });
-        } 
+        }
 
 
-        public ActionResult RemoveFromCart(int id,string returnUrl)
+        public ActionResult RemoveFromCart(int id, string returnUrl)
         {
-            
-            return RedirectToAction("Index","ShoppingCart",new { returnUrl = returnUrl });
+            var cart = shoppingCartFactory.GetCart(this.HttpContext);
+            orderService.RemoveFromCart(id, cart.ShoppingCartId);
+            return RedirectToAction("Index", "ShoppingCart", new { returnUrl = returnUrl });
+        }
+        public async Task<ActionResult> EmptyCart(string returnUrl)
+        {
+            var cart = shoppingCartFactory.GetCart(this.HttpContext);
+            await orderService.EmptyCart(cart.ShoppingCartId);
+            return RedirectToAction("Index", new { returnUrl = returnUrl });
         }
         
-       
+
+
 
     }
 }

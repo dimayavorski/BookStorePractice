@@ -92,5 +92,26 @@ namespace BookStore.BLL.Services
             
             return  mapper.Map<IEnumerable<CartItem>, List<CartItemDTO>>(await Database.Carts.GetAll(Id));
         }
+
+        public void RemoveFromCart(int id, string CartId)
+        {
+            
+             Database.Carts.Remove(id, CartId);
+            Database.Save();
+            
+        }
+
+        public async Task<decimal> GetTotal(string CartId)
+        {
+            var cartItems = await Database.Carts.GetAll(CartId);
+            decimal total = cartItems.Select(c => c.Book.Price * c.Count).Sum();
+            return total;
+        }
+        public async Task EmptyCart(string CartId)
+        {
+            var cartItems = await Database.Carts.GetAll(CartId);
+            await Database.Carts.Empty(CartId);
+            await Database.SaveAsync();
+        }
     }
 }
