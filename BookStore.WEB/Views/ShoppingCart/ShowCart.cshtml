@@ -1,4 +1,4 @@
-﻿@*@model BookStore.WEB.Model.ShoppingCartViewModel
+﻿@model BookStore.WEB.Models.ShoppingCartViewModel
 <table class="table">
     <thead>
         <tr>
@@ -15,19 +15,21 @@
                 <td>@line.Count</td>
                 <td>@line.Book.Name</td>
                 <td>@line.Book.Price.ToString("# руб")</td>
-                <td></td>
+                <td>@((line.Book.Price * line.Count).ToString("# руб"))</td>
                 <td>
-                @Html.ActionLink("Удалить", "RemoveFromCart", "ShoppingCart", new { id = line.Book.Id, returnUrl = Model.returnUrl},new {@class="btn btn-primary"})
+                    @Ajax.ActionLink("Удалить", "RemoveFromCart", "ShoppingCart",
+                   new { id = line.CartItemId, returnUrl = Model.returnUrl },new AjaxOptions { HttpMethod="GET",UpdateTargetId = "updateCart"
+                   } ,new { @class = "btn btn-primary" })
                 </td>
-        </tr>
-    }
+            </tr>
+        }
     </tbody>
     <tfoot>
         <tr>
             <td colspan="3">Итоге:</td>
             <td>
-               
+                @Model.CartTotal.ToString("# руб")
             </td>
         </tr>
     </tfoot>
-</table>*@
+</table>
