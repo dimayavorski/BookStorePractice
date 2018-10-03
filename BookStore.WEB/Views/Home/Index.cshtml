@@ -6,10 +6,12 @@
 @{
     ViewBag.Title = "Товары";
 }
-@foreach (var book in Model)
-{
-    @Html.Partial("BookSummary", book)
-}
+<div id="updateProducts">
+    @foreach (var book in Model)
+    {
+        @Html.Partial("BookSummary", book)
+    }
+</div>
 <div class="float-right">
     @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
 </div>
