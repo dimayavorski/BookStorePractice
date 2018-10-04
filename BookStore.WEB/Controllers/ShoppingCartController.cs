@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using BookStore.BLL.DTO;
 using System.Web.Mvc;
+using AutoMapper;
 using BookStore.BLL.Interface;
 using System.Threading.Tasks;
 using BookStore.WEB.Models;
@@ -20,15 +21,15 @@ namespace BookStore.WEB.Controllers
             orderService = service;
             shoppingCartFactory = factory;
         }
-        public async Task<ActionResult> Index(string returnUrl)
+        public async Task<ActionResult> Index(string returnUrl,Controller controller)
         {
 
-            var cartId = shoppingCartFactory.GetCart(this.HttpContext).ShoppingCartId;
+            var cartId = shoppingCartFactory.GetCart(HttpContext);
             ShoppingCartViewModel viewModel = new ShoppingCartViewModel
             {
-                CartItems = await orderService.GetAllCartItems(cartId),
+                CartItems = await orderService.GetAllCartItems(cartId.ShoppingCartId),
                 returnUrl = returnUrl,
-                CartTotal = await orderService.GetTotal(cartId)
+                CartTotal = await orderService.GetTotal(cartId.ShoppingCartId)
             };
             return View(viewModel);
         }
@@ -46,14 +47,15 @@ namespace BookStore.WEB.Controllers
         //    return  PartialView(viewModel);
         //}
 
-        public async Task<ActionResult> AddToCart(int? id, int? page, string category)
-        {
-            var addedBook = orderService.GetBook(id.Value);
-            var cart = shoppingCartFactory.GetCart(this.HttpContext);
-            await orderService.AddToCart(addedBook,cart.ShoppingCartId);
-            
-            return RedirectToAction("Index","Home", new { page = page.Value, category = category });
-        }
+        //public async Task<ActionResult> AddToCart(int? id, int? page, string category)
+        //{
+        //    var addedBook = orderService.GetBook(id.Value);
+        //    var cart = shoppingCartFactory.GetCart(this.HttpContext);
+        //    await orderService.AddToCart(addedBook,cart.ShoppingCartId);
+
+        //    return RedirectToAction("Index","Home", new { page = page.Value, category = category });
+        //}
+
 
 
         //public ActionResult RemoveFromCart(int id, string returnUrl)
@@ -62,6 +64,7 @@ namespace BookStore.WEB.Controllers
         //    orderService.RemoveFromCart(id, cart.ShoppingCartId);
         //    return RedirectToAction("Index", "ShoppingCart", new { returnUrl = returnUrl });
         //}
+        
         public async Task<ActionResult> RemoveFromCart(int id)
         {
             var cartId = shoppingCartFactory.GetCart(this.HttpContext).ShoppingCartId;

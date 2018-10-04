@@ -1,20 +1,21 @@
-﻿.card {
-    margin:20px;
-}
+﻿
 /*Nav*/
-#nav {
-    width:100%;
-}
-.fixed {
-    position:fixed !important;
+
+/*.fixed {
+    position:fixed;
     top:0;
     left:0;
     z-index:1;
-}
-.btnsizing {
-    width:200px;
-    height:100px;
-    border: 1px solid #2d42b7;
-    background-color:aqua;
-    font-size:20px;
+}*/
+
+
+
+
+
+
+
+
+/*Left Menu*/
+.slide {
+    font-size : 30px;
 }

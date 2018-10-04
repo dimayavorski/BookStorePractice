@@ -20,7 +20,7 @@ namespace BookStore.WEB.Models
         {
             var cart = new ShoppingCart(orderService);
             cart.ShoppingCartId = cart.GetCardId(context);
-            
+
             return cart;
         }
         // Helper method to simplify shopping cart calls

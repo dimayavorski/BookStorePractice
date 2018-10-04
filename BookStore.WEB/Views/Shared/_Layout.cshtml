@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="~/Content/Site.css" rel="stylesheet" />
     <title>@ViewBag.Title - BookStore</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -16,7 +15,7 @@
         {
 
         }*@
-        @Html.ActionLink("Корзина","Index", "ShoppingCart",new { returnUrl = Request.Url.PathAndQuery}, new { @class = "btn btn-outline-light float-left" })
+        @Html.ActionLink("Корзина", "Index", "ShoppingCart", new { returnUrl = Request.Url.PathAndQuery }, new { @class = "btn btn-outline-light float-left" })
         <div class="form-inline">
 
             <input class="form-control float-right mr-sm-2" placeholder="Автор/Книга" />
@@ -26,7 +25,7 @@
    
     <section class="container">
         <div class="row">
-            <div class="col-sm-2">@Html.Action("GetNav","Nav")</div>
+            <div class="col-sm-2">@{Html.RenderAction("GetNav", "Nav");}</div>
             <div class="col-sm-10">@RenderBody()</div>
             
 

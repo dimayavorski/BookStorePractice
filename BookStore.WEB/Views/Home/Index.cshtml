@@ -1,17 +1,20 @@
-﻿
-@model PagedList.IPagedList<BookStore.WEB.Models.BookViewModel>
+﻿@model PagedList.IPagedList<BookStore.BLL.DTO.BookDTO>
 @using PagedList.Mvc;
 
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Товары";
 }
+
 <div id="updateProducts">
-    @foreach (var book in Model)
-    {
-        @Html.Partial("BookSummary", book)
-    }
+    @Html.Partial("BookSummary")
 </div>
+
 <div class="float-right">
     @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
 </div>
+@*@model BookStore.WEB.Models.BookViewModel 
+
+    <div id="updateProducts">
+            @Html.Partial("BookSummary")
+        </div>*@

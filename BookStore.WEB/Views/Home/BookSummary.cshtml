@@ -1,18 +1,47 @@
-﻿@model BookStore.WEB.Models.BookViewModel
-<div class="card cards">
-        <div class="card-body">
-            <h4 class="card-title">@Model.Name</h4>
-            <h6 class="card-text">Жанр : @Model.Category</h6>
-            <p class="card-text">@Model.Description</p>
-            <h6 class="card-title">@Model.Author</h6>
-            <h6 class="text-right">@Model.Price.ToString("# руб")</h6>
-            @using (Ajax.BeginForm("AddToCart","ShoppingCart",new AjaxOptions { UpdateTargetId = "updateProducts" }))
-            {
+﻿@*@model BookStore.WEB.Models.BookViewModel
+    <div class="card cards">
+            <div class="card-body">
+                <h4 class="card-title">@Model.Name</h4>
+                <h6 class="card-text">Жанр : @Model.Category</h6>
+                <p class="card-text">@Model.Description</p>
+                <h6 class="card-title">@Model.Author</h6>
+                <h6 class="text-right">@Model.Price.ToString("# руб")</h6>
+                @using (Ajax.BeginForm("AddToCart","ShoppingCart",new AjaxOptions { UpdateTargetId = "updateProducts" }))
+                {
 
-                @Html.HiddenFor(m=>m.Id)
-                <input type="hidden" value="@ViewBag.page" name="page" />
-                <input type="hidden" value="@ViewBag.category" name="category" />
-                <input type="submit" class="btn btn-sm btn-primary" value="Добавить в корзину" />
-            }
+                    @Html.HiddenFor(m=>m.Id)
+                    <input type="hidden" value="@ViewBag.page" name="page" />
+                    <input type="hidden" value="@ViewBag.category" name="category" />
+                    <input type="submit" class="btn btn-sm btn-primary" value="Добавить в корзину" />
+                }
+            </div>
+        </div>
+    <script>
+
+    </script>*@
+@model PagedList.IPagedList<BookStore.BLL.DTO.BookDTO>
+@*@model IEnumerable<BookStore.BLL.DTO.BookDTO>*@
+@using PagedList.Mvc;
+@foreach (var book in Model)
+{
+    <div class="card cards">
+        <div class="card-body">
+            <h4 class="card-title">@book.Name</h4>
+            <h6 class="card-text">Жанр : @book.Category</h6>
+            <p class="card-text">@book.Description</p>
+            <h6 class="card-title">@book.Author</h6>
+            <h6 class="text-right">@book.Price.ToString("# руб")</h6>
+            @*@using (Html.BeginForm("AddToCart", "ShoppingCart"))
+                {
+
+                    <input  type="hidden" value="@book.Id" name="id"/>
+                    <input type="hidden" value="@ViewBag.page" name="page" />
+                    <input type="hidden" value="@ViewBag.category" name="category" />
+                    <input type="submit" class="btn btn-sm btn-primary" value="Добавить в корзину" />
+                }*@
+            @Ajax.ActionLink("Добавить в корзину", "AddToCart", "Home", new { id = book.Id, page = Model.PageNumber,category = ViewBag.Category }, new AjaxOptions { UpdateTargetId = "updateProducts" }, new { @class = "btn btn-primary" })
+            @*@Html.ActionLink("Добавить в корзину", "AddToCart", "Home", new { id = book.Id },new { @class = "btn btn-primary" })*@
+
         </div>
     </div>
+}
