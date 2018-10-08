@@ -1,0 +1,48 @@
+﻿.slide {
+   position:fixed;
+   width:200px;
+   z-index:10;
+
+}
+.slide a {
+    text-decoration:none;
+}
+.slide ul{
+    margin:0;
+    padding:0;
+     list-style:none;
+ }
+.menu a {
+    background:#007bff;
+    color:#fff;
+    padding:10px;
+    display:block;
+    text-align:center;
+}
+.menu_list {
+    position:relative;
+}
+.menu_drop{
+    position:absolute;
+    width:100%;
+    left:100%;
+    top:0;
+    
+    display:none;
+}
+
+/*.menu li:last-child a{
+    border-radius:0 0 3px 3px;
+}*/
+/*Animation*/
+.menu a:hover {
+    background: #17a2b8;
+    transition: 0.5s all;
+}
+.menu_list:hover .menu_drop{
+    display:block;
+}
+/*Top Navbar*/
+
+ 
+ 

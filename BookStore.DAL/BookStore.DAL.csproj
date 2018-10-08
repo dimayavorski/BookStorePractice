@@ -54,6 +54,8 @@
     <Compile Include="Entities\Book.cs" />
     <Compile Include="Entities\CartItem.cs" />
     <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Order.cs" />
+    <Compile Include="Entities\OrderDetail.cs" />
     <Compile Include="Interfaces\ICartRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
@@ -81,12 +83,17 @@
     <Compile Include="Migrations\201809291441353_added cartItems.Designer.cs">
       <DependentUpon>201809291441353_added cartItems.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810061624032_Order and OrderDetails.cs" />
+    <Compile Include="Migrations\201810061624032_Order and OrderDetails.Designer.cs">
+      <DependentUpon>201810061624032_Order and OrderDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BookRepository.cs" />
     <Compile Include="Repositories\CartRepository.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\EfUnitOfWork.cs" />
+    <Compile Include="Repositories\OrderRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -110,6 +117,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809291441353_added cartItems.resx">
       <DependentUpon>201809291441353_added cartItems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810061624032_Order and OrderDetails.resx">
+      <DependentUpon>201810061624032_Order and OrderDetails.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

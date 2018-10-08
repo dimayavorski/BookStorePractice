@@ -20,6 +20,7 @@ namespace BookStore.BLL.Interface
         void RemoveFromCart(int id, string CartId);
         Task<decimal> GetTotal(string CartId);
         Task EmptyCart(string CartId);
+        Task CreateNewOrder(OrderDTO orderDTO, string CartId);
         void Dispose();
     }
 }

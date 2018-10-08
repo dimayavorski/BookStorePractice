@@ -13,6 +13,7 @@ namespace BookStore.DAL.Interfaces
         Task<List<CartItem>> GetAll(string Id);
         void Remove(int id, string CartId);
         Task Empty(string CartId);
+        Task CreateOrder(Order order, string CartId);
 
     }
 }

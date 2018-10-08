@@ -13,6 +13,7 @@ namespace BookStore.DAL.Repositories
     public class CartRepository : ICartRepository
     {
         private readonly BookContext db;
+        
         public CartRepository(BookContext context)
         {
             db = context;
@@ -72,6 +73,29 @@ namespace BookStore.DAL.Repositories
                 }
             }
             
+        }
+        public async Task CreateOrder(Order order,string CartId)
+        {
+            decimal orderTotal = 0;
+            var cartItems = await GetAll(CartId);
+            foreach (var item in cartItems)
+            {
+                var book = await db.Books.SingleAsync(b => b.Id == item.BookId);
+                var orderDetail = new OrderDetail
+                {
+                    BookId = item.BookId,
+                    OrderId = order.OrderId,
+                    UnitPrice = book.Price,
+                    Quantity = item.Count
+                };
+                orderTotal += (item.Count * book.Price);
+                db.OrderDetails.Add(orderDetail);
+
+            }
+            order.Total = orderTotal;
+            db.Orders.Add(order);
+            await Empty(CartId);
+
         }
     }
 }

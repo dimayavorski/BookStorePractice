@@ -113,5 +113,26 @@ namespace BookStore.BLL.Services
             await Database.Carts.Empty(CartId);
             await Database.SaveAsync();
         }
+
+
+        // Orders logic
+        public async Task CreateNewOrder(OrderDTO orderDTO, string CartId)
+        {
+           
+            var order = new Order
+            {
+                OrderDate = orderDTO.OrderDate,
+                UserName = orderDTO.UserName,
+                FirstName = orderDTO.FirstName,
+                LastName = orderDTO.LastName,
+                Address = orderDTO.Address,
+                City = orderDTO.City,
+                Phone = orderDTO.Phone,
+                Email = orderDTO.Email
+            };
+            await Database.Carts.CreateOrder(order, CartId);
+            await Database.SaveAsync();
+            
+        }
     }
 }
