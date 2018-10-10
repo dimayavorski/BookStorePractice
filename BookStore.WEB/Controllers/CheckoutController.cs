@@ -3,10 +3,12 @@ using BookStore.BLL.Interface;
 using BookStore.WEB.Models;
 using System;
 using System.Collections.Generic;
+
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using BookStore.BLL.Infrastructure;
 
 namespace BookStore.WEB.Controllers
 {
@@ -19,8 +21,8 @@ namespace BookStore.WEB.Controllers
         {
             shoppingCartFactory = factory;
             orderSerivce = service;
-        } 
-        public ActionResult  MakeOrder()
+        }
+        public ActionResult MakeOrder()
         {
             return View();
         }
@@ -28,13 +30,25 @@ namespace BookStore.WEB.Controllers
         public async Task<ActionResult> MakeOrder(FormCollection values)
         {
             var order = new OrderDTO();
-            TryUpdateModel(order);
-            order.OrderDate = DateTime.Now;
-            var cart = shoppingCartFactory.GetCart(this.HttpContext);
-            await orderSerivce.CreateNewOrder(order, cart.ShoppingCartId);
-
-
-            return RedirectToAction("Complete",new { name =order.FirstName,lname = order.LastName });
+            if (ModelState.IsValid)
+            {
+                
+                try
+                {
+                    TryUpdateModel(order);
+                    order.OrderDate = DateTime.Now;
+                    var cart = shoppingCartFactory.GetCart(this.HttpContext);
+                    await orderSerivce.CreateNewOrder(order, cart.ShoppingCartId);
+                    return RedirectToAction("Complete");
+                }
+                catch (ValidationException ex)
+                {
+                    ModelState.AddModelError(ex.Property, ex.Message);  
+                }
+                
+            }
+                return View(order);
+            
         }
         public ActionResult Complete(string name,string lname)
         {

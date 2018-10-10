@@ -76,6 +76,7 @@ namespace BookStore.DAL.Repositories
         }
         public async Task CreateOrder(Order order,string CartId)
         {
+            
             decimal orderTotal = 0;
             var cartItems = await GetAll(CartId);
             foreach (var item in cartItems)

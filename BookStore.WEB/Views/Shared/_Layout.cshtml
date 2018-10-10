@@ -9,20 +9,20 @@
     <link href="~/Content/NavStyles.css" rel="stylesheet" />
 </head>
 <body>
-   
+
     <nav class="navbar navbar-dark bg-primary navbar-expand-lg sticky-top">
         <a href="#" class="navbar-brand">BookStore</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    @Html.ActionLink("Корзина", "Index", "ShoppingCart", new { returnUrl = Request.Url.PathAndQuery },new {@class ="nav-link" })
+                    @Html.ActionLink("Корзина", "Index", "ShoppingCart", new { returnUrl = Request.Url.PathAndQuery }, new { @class = "nav-link" })
                 </li>
             </ul>
             <form class="form-inline">
                 <input class="form-control mr-sm-2" placeholder="Автор/Книга" />
                 <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Поиск</button>
             </form>
-            </div>
+        </div>
     </nav>
     <section class="container-fluid">
         <div class="row">
@@ -31,8 +31,10 @@
         </div>
     </section>
 
-        @Scripts.Render("~/bundles/jquery")
-        @*@Scripts.Render("~/bundles/bootstrap")*@
-        @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    @RenderSection("scripts", required: false)
 </body>
 </html>

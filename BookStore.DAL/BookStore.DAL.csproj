@@ -87,6 +87,18 @@
     <Compile Include="Migrations\201810061624032_Order and OrderDetails.Designer.cs">
       <DependentUpon>201810061624032_Order and OrderDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810081819081_dataAttr.cs" />
+    <Compile Include="Migrations\201810081819081_dataAttr.Designer.cs">
+      <DependentUpon>201810081819081_dataAttr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810081949280_dataAttrRemove.cs" />
+    <Compile Include="Migrations\201810081949280_dataAttrRemove.Designer.cs">
+      <DependentUpon>201810081949280_dataAttrRemove.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810101616595_email.cs" />
+    <Compile Include="Migrations\201810101616595_email.Designer.cs">
+      <DependentUpon>201810101616595_email.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BookRepository.cs" />
@@ -120,6 +132,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810061624032_Order and OrderDetails.resx">
       <DependentUpon>201810061624032_Order and OrderDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810081819081_dataAttr.resx">
+      <DependentUpon>201810081819081_dataAttr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810081949280_dataAttrRemove.resx">
+      <DependentUpon>201810081949280_dataAttrRemove.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810101616595_email.resx">
+      <DependentUpon>201810101616595_email.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,6 +8,8 @@ using BookStore.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -118,7 +120,10 @@ namespace BookStore.BLL.Services
         // Orders logic
         public async Task CreateNewOrder(OrderDTO orderDTO, string CartId)
         {
-           
+            if (IsAnyNullOrEmpty(orderDTO))
+            {
+                throw new ValidationException("Все поля должны быть заполнены", "");
+            }
             var order = new Order
             {
                 OrderDate = orderDTO.OrderDate,
@@ -130,9 +135,33 @@ namespace BookStore.BLL.Services
                 Phone = orderDTO.Phone,
                 Email = orderDTO.Email
             };
-            await Database.Carts.CreateOrder(order, CartId);
-            await Database.SaveAsync();
+            try
+            {
+                await Database.Carts.CreateOrder(order, CartId);
+                await Database.SaveAsync();
+            }
+            catch (Exception)
+            {
+                throw new ValidationException("Email указан некорректно", "Email");
+            }
             
         }
+        private bool IsAnyNullOrEmpty(OrderDTO order)
+        {
+            foreach (PropertyInfo pi in order.GetType().GetProperties())
+            {
+                if (pi.PropertyType == typeof(string))
+                {
+                    string value = (string)pi.GetValue(order);
+                    if (string.IsNullOrWhiteSpace(value))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
     }
+    
 }
