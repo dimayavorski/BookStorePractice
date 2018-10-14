@@ -120,10 +120,10 @@ namespace BookStore.BLL.Services
         // Orders logic
         public async Task CreateNewOrder(OrderDTO orderDTO, string CartId)
         {
-            if (IsAnyNullOrEmpty(orderDTO))
-            {
-                throw new ValidationException("Все поля должны быть заполнены", "");
-            }
+            //if (IsAnyNullOrEmpty(orderDTO))
+            //{
+            //    throw new ValidationException("Все поля должны быть заполнены", "");
+            //}
             var order = new Order
             {
                 OrderDate = orderDTO.OrderDate,
@@ -135,15 +135,15 @@ namespace BookStore.BLL.Services
                 Phone = orderDTO.Phone,
                 Email = orderDTO.Email
             };
-            try
-            {
+            //try
+            //{
                 await Database.Carts.CreateOrder(order, CartId);
                 await Database.SaveAsync();
-            }
-            catch (Exception)
-            {
-                throw new ValidationException("Email указан некорректно", "Email");
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    throw new ValidationException("Email указан некорректно", "Email");
+            //}
             
         }
         private bool IsAnyNullOrEmpty(OrderDTO order)

@@ -21,3 +21,4 @@ D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.Migrations
 D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.Migrations.dataAttr.resources
 D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.Migrations.dataAttrRemove.resources
 D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.Migrations.email.resources
+D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.Migrations.Back.resources

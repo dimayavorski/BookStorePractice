@@ -22,32 +22,26 @@ namespace BookStore.WEB.Controllers
             shoppingCartFactory = factory;
             orderSerivce = service;
         }
+        [HttpGet]
         public ActionResult MakeOrder()
         {
             return View();
         }
         [HttpPost]
-        public async Task<ActionResult> MakeOrder(FormCollection values)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> MakeOrder(OrderViewModel model)
         {
             var order = new OrderDTO();
             if (ModelState.IsValid)
-            {
-                
-                try
-                {
+            { 
                     TryUpdateModel(order);
                     order.OrderDate = DateTime.Now;
                     var cart = shoppingCartFactory.GetCart(this.HttpContext);
                     await orderSerivce.CreateNewOrder(order, cart.ShoppingCartId);
                     return RedirectToAction("Complete");
-                }
-                catch (ValidationException ex)
-                {
-                    ModelState.AddModelError(ex.Property, ex.Message);  
-                }
-                
             }
-                return View(order);
+           
+                return View(model);
             
         }
         public ActionResult Complete(string name,string lname)

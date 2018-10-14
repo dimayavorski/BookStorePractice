@@ -80,6 +80,11 @@ namespace BookStore.WEB.Controllers
         public async Task<ActionResult> EmptyCart()
         {
             var cartId = shoppingCartFactory.GetCart(this.HttpContext).ShoppingCartId;
+            var CartItems = await orderService.GetAllCartItems(cartId);
+            if(CartItems.Count ==0)
+            {
+                ModelState.AddModelError("", "Ваша корзина пуста");
+            }
             await orderService.EmptyCart(cartId);
             ShoppingCartViewModel viewModel = new ShoppingCartViewModel
             {

@@ -5,10 +5,11 @@
 }
 
 <h2>Ваша корзина</h2>
+
 <div id="updateCart">
     @Html.Partial("ShowCart")
 </div>
-@*<a class="btn btn-primary btn-sm" href="@Model.returnUrl">Продолжить покупки</a>*@
+<a class="btn btn-primary btn-sm" href="@Model.returnUrl">Продолжить покупки</a>
 @Ajax.ActionLink("Очистить корзину", "EmptyCart", "ShoppingCart", null, new AjaxOptions
 {
     HttpMethod = "GET",
