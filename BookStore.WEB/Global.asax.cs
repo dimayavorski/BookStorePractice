@@ -19,7 +19,7 @@ namespace BookStore.WEB
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             //Ninject
-            ServiceModule serviceModule = new ServiceModule("BookContext");
+            ServiceModule serviceModule = new ServiceModule();
             OrderModule orderModule = new OrderModule();
             var kernel = new StandardKernel(serviceModule, orderModule);
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));

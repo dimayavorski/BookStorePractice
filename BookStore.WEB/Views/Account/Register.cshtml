@@ -1,0 +1,12 @@
+﻿@model BookStore.WEB.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Register</h2>
+@using (Html.BeginForm())
+{
+    @Html.EditorForModel();
+    <input type="submit" value ="Подтвердить" class="btn btn-primary"/>
+}

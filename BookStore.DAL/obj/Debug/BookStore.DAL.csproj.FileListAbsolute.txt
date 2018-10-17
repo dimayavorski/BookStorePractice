@@ -22,3 +22,8 @@ D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.Migrations
 D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.Migrations.dataAttrRemove.resources
 D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.Migrations.email.resources
 D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.Migrations.Back.resources
+D:\Projects\BookStore\BookStore\BookStore.DAL\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+D:\Projects\BookStore\BookStore\BookStore.DAL\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\Projects\BookStore\BookStore\BookStore.DAL\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+D:\Projects\BookStore\BookStore\BookStore.DAL\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\Projects\BookStore\BookStore\BookStore.DAL\obj\Debug\BookStore.DAL.Migrations.AddedRoleandUserentities.resources
