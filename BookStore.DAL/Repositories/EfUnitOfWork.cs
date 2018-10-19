@@ -1,6 +1,8 @@
 ﻿using BookStore.DAL.EF;
 using BookStore.DAL.Entities;
+using BookStore.DAL.Identity;
 using BookStore.DAL.Interfaces;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +17,26 @@ namespace BookStore.DAL.Repositories
         private BookRepository bookRepository;
         private CategoryRepository categoryRepository;
         private CartRepository cartRepository;
-        
-        public EfUnitOfWork(string connectionString)
+        private ApplicationUserManager userManager;
+        private ApplicationRoleManager roleManager;
+      
+
+        public EfUnitOfWork()
         {
-            db = new BookContext(connectionString);
+            db = new BookContext();
+            userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
+            roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(db));
+        }
+        public ApplicationUserManager UserManager
+        {
+            get { return userManager; }
+        }
+
+       
+
+        public ApplicationRoleManager RoleManager
+        {
+            get { return roleManager; }
         }
         public IRepository<Book> Books
         {

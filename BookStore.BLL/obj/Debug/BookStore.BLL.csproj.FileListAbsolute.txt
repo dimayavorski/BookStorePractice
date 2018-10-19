@@ -20,3 +20,7 @@ D:\Projects\BookStore\BookStore\BookStore.BLL\obj\Debug\BookStore.BLL.csproj.Cor
 D:\Projects\BookStore\BookStore\BookStore.BLL\obj\Debug\BookStore.BLL.csproj.CopyComplete
 D:\Projects\BookStore\BookStore\BookStore.BLL\obj\Debug\BookStore.BLL.dll
 D:\Projects\BookStore\BookStore\BookStore.BLL\obj\Debug\BookStore.BLL.pdb
+D:\Projects\BookStore\BookStore\BookStore.BLL\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\Projects\BookStore\BookStore\BookStore.BLL\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+D:\Projects\BookStore\BookStore\BookStore.BLL\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\Projects\BookStore\BookStore\BookStore.BLL\bin\Debug\Microsoft.AspNet.Identity.Core.xml
