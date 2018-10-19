@@ -4,6 +4,7 @@ using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using BookStore.BLL.DTO;
@@ -38,12 +39,47 @@ namespace BookStore.WEB.Controllers
             }
         }
 
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Login(LoginViewModel viewModel)
+        {
+            await SetInitialDataAsync();
+            if (ModelState.IsValid)
+            {
+                UserDTO userDto = new UserDTO {Email = viewModel.Email, Password = viewModel.Password};
+                ClaimsIdentity claim = await UserService.Authenticate(userDto);
+                if(claim==null)
+                    ModelState.AddModelError("","Неверный логин или пароль");
+                else
+                {
+                    AuthenticationManager.SignOut();
+                    AuthenticationManager.SignIn(new AuthenticationProperties
+                    {
+                        IsPersistent = true
+                    },claim);
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
+            return View(viewModel);
+        }
+
+        public ActionResult Logout()
+        {
+            AuthenticationManager.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
         public ActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel viewModel)
         {
             await SetInitialDataAsync();
@@ -59,7 +95,7 @@ namespace BookStore.WEB.Controllers
                 OperationDetails operationDetails = await UserService.Create(user);
                 
                 if (operationDetails.Succedeed)
-                    return RedirectToAction("Index","Home");
+                    return View("SuccessRegister");
                 else
                     ModelState.AddModelError(operationDetails.Property, operationDetails.Message);
             }

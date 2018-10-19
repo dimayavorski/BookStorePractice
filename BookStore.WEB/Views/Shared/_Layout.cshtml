@@ -28,7 +28,15 @@
                 <input class="form-control mr-sm-2" placeholder="Автор/Книга" />
                 <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Поиск</button>
             </form>
-            @Html.ActionLink("Регистрация","Register","Account",null,new {@class = "btn-outline-light btn"})
+            @if (!User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Войти","Login","Account",null,new {@class = "btn-outline-light btn ml-1"})
+            }
+            else
+            {
+                @Html.ActionLink("Выйти","Logout","Account",null,new {@class = "btn-outline-light btn ml-1"})
+            }
+           
             <a class="btn btn-outline-light mx-1" href="@Url.Action("Index","ShoppingCart",  new { returnUrl = Request.Url.PathAndQuery })">
                     <i class="fas fa-shopping-cart mr-1"></i>Корзина
                 </a>

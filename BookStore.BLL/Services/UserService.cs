@@ -9,6 +9,7 @@ using BookStore.BLL.Infrastructure;
 using BookStore.BLL.Interfaces;
 using BookStore.DAL.Entities;
 using BookStore.DAL.Interfaces;
+using Microsoft.AspNet.Identity;
 
 namespace BookStore.BLL.Services
 {
@@ -20,9 +21,18 @@ namespace BookStore.BLL.Services
         {
             Database = uow;
         }
-        public Task<ClaimsIdentity> Authenticate(UserDTO userDto)
+        public async Task<ClaimsIdentity> Authenticate(UserDTO userDto)
         {
-            throw new NotImplementedException();
+            ClaimsIdentity claim = null;
+            var user = await Database.UserManager.FindAsync(userDto.Email, userDto.Password);
+            if (user != null)
+            {
+                claim = await Database.UserManager.CreateIdentityAsync(user,
+                    DefaultAuthenticationTypes.ApplicationCookie);
+            }
+
+            return claim;
+
         }
 
         public async Task<OperationDetails> Create(UserDTO userDto)
@@ -31,7 +41,7 @@ namespace BookStore.BLL.Services
             if (user == null)
             {
                 user = new ApplicationUser{Email = userDto.Email, UserName = userDto.Email};
-                var result = await Database.UserManager.CreateAsync(user);
+                var result = await Database.UserManager.CreateAsync(user,userDto.Password);
                 if(result.Errors.Count()>1)
                     return new OperationDetails(false,result.Errors.FirstOrDefault(),"");
                 await Database.UserManager.AddToRoleAsync(user.Id, userDto.Role);
@@ -60,7 +70,6 @@ namespace BookStore.BLL.Services
                     await Database.RoleManager.CreateAsync(role);
                 }
             }
-
             await Create(adminDto);
         }
     }
